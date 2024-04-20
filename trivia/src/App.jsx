@@ -11,6 +11,7 @@ export default function App() {
   const [numCorrect, setNumCorrect] = useState(0)
   const [numClicks, setNumClicks] = useState(0)
   const [showSnackbar, setShowSnackbar] = useState(false)
+  const [correct, setCorrect] = useState(false)
   var answers
  
   useEffect(() => {
@@ -37,14 +38,20 @@ export default function App() {
 }
 
   const handleNext = (answer) => {
+    setShowSnackbar(false)
     setNumClicks(numClicks + 1)
     if (numClicks < data.length) {
       if (answer) {setNumCorrect(numCorrect + 1)}
       if (numClicks < data.length - 1) {
       setQuestionNum(questionNum + 1)}}
-
-    answer ? alert("Correct!") : alert("Incorrect!")
     
+    if (answer) {
+      setCorrect(true)
+    } else {
+      setCorrect(false)
+    }
+
+    console.log(answer)
     answers = shuffleArray([...data[questionNum].incorrectAnswers, data[questionNum].correctAnswer])
     setShowSnackbar(true)
   }
@@ -73,8 +80,7 @@ export default function App() {
                 >
                   {answer}
                 </Button>
-                {showSnackbar && <FeedbackSnackbar answer={answer == data[questionNum]} openSnackbar={true}/>}
-                
+                <FeedbackSnackbar answer={correct} openSnackbar={true} opened={showSnackbar} setShowSnackbar={setShowSnackbar}/>
                  </>
               ))}<h3>Correct: {numCorrect}/{data?.length}</h3>
             </div>
