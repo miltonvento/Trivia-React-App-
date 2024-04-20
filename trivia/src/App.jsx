@@ -8,10 +8,10 @@ export default function App() {
   const URL = "https://the-trivia-api.com/v2/questions"
   const [data, setData] = useState(null)
   const [questionNum, setQuestionNum] = useState(0)
+  const [numCorrect, setNumCorrect] = useState(0)
+  const [numClicks, setNumClicks] = useState(0)
   const [showSnackbar, setShowSnackbar] = useState(false)
-
   var answers
-  var correctAnswers
  
   useEffect(() => {
       const fetchData = async() => {
@@ -37,7 +37,11 @@ export default function App() {
 }
 
   const handleNext = (answer) => {
-    if (questionNum < data.length - 1) {setQuestionNum(questionNum + 1)}
+    setNumClicks(numClicks + 1)
+    if (numClicks < data.length) {
+      if (answer) {setNumCorrect(numCorrect + 1)}
+      if (numClicks < data.length - 1) {
+      setQuestionNum(questionNum + 1)}}
 
     answer ? alert("Correct!") : alert("Incorrect!")
     
@@ -57,7 +61,7 @@ export default function App() {
             <div className="buttonContainer">
               {answers ? answers : shuffleArray([...data[questionNum].incorrectAnswers, data[questionNum].correctAnswer])
 .map((answer, key) => (
-  <>
+  <>{console.log(data[questionNum].correctAnswer)}
                 <Button
                   className="answerButton"
                   key={key}
@@ -70,8 +74,9 @@ export default function App() {
                   {answer}
                 </Button>
                 {showSnackbar && <FeedbackSnackbar answer={answer == data[questionNum]} openSnackbar={true}/>}
+                
                  </>
-              ))}
+              ))}<h3>Correct: {numCorrect}/{data?.length}</h3>
             </div>
           </>
         )}
