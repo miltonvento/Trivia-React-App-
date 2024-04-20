@@ -1,6 +1,6 @@
 # Trivia-React-App-
 Simple Trivia App made with React
 
-Walkthorugh:
+Walkthrough:
 
-<img src="TriviaWalkthrough.gif" alt="Walkthrough"/>
+<img src="TriviaAppWalkThrough.gif" alt="Walkthrough"/>
