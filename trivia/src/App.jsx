@@ -36,9 +36,12 @@ export default function App() {
     return array;
 }
 
-  const handleNext = () => {
-    setQuestionNum(questionNum + 1)
-    answers = shuffleArray(data[questionNum].push(data[questionNum].correctAnswer))
+  const handleNext = (answer) => {
+    if (questionNum < data.length - 1) {setQuestionNum(questionNum + 1)}
+
+    answer ? alert("Correct!") : alert("Incorrect!")
+    
+    answers = shuffleArray([...data[questionNum].incorrectAnswers, data[questionNum].correctAnswer])
     setShowSnackbar(true)
   }
 
@@ -58,7 +61,7 @@ export default function App() {
                 <Button
                   className="answerButton"
                   key={key}
-                  onClick={handleNext}
+                  onClick={()=>handleNext(answer == data[questionNum].correctAnswer)}
                   variant="outlined"
                   size="large"
                   sx={{ width: "20em" }}
