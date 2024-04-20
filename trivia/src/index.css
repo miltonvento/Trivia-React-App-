@@ -1,0 +1,30 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.main-area {
+  display: flex;
+  flex-direction: column;
+  height: 45em;
+  width: 40em;
+  border: 2px solid;
+  align-items: center;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+  margin-top: 3em;
+  color: "282F38";
+}
+
+.answerButton {
+  margin-bottom: 2em;
+}
+
